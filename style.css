@@ -2,7 +2,7 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-html, body, div, span, applet, object, iframe,
+/* html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
@@ -45,7 +45,7 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-
+ */
 /* ============== inputs ============== */
 form {
   margin: 0 auto;
@@ -93,18 +93,29 @@ textarea {
   height: 5em;
 }
 
-.button {
-  padding-left: 90px;
-}
-
-button {
-  margin-left: .5em;
-}
+button {}
 
 /* ============== Overview ============== */
-*, html, body {
+*, html, body, .wrapper {
   font-family: 'Arial', 'Helvetica', sans-serif;
   font-size: 12px;
   height: 100%;
   margin: 0;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+/* ============== Grid ============== */
+.grid {
+  width: 600px;
+  height: 600px;
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0%;
 }
