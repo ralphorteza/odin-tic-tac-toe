@@ -96,7 +96,7 @@ textarea {
 /* button {} */
 
 /* ============== Overview ============== */
-*, html, body, .wrapper {
+html, body, .wrapper {
   font-family: 'Arial', 'Helvetica', sans-serif;
   font-size: 12px;
   height: 100%;
@@ -107,6 +107,20 @@ textarea {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(5, 1fr);
+}
+
+.header {
+  grid-column: 3 / 4;
+  grid-row: 1 / 2;
+  justify-self: center;
+  align-self: center;
+
+  display: flex;
+}
+
+.header > * {
+  width: 150px;
+  height: 75px;
 }
 
 /* ============== Grid ============== */
