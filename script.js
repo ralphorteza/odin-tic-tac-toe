@@ -21,7 +21,7 @@ const gameBoard = () => {
 const displayController = (() => {
   const grid = document.querySelectorAll('.grid');
   const reset = document.querySelector('.reset');
-
+  let sign = null;
   const resetGame = () => {
     let board = document.getElementById('grid');
     let fields = board.children;
@@ -32,17 +32,29 @@ const displayController = (() => {
     }
   };
 
+  const setSign = () => {
+    if (sign === null) {
+      sign = 'x';
+    } else if (sign === 'o') {
+      sign = 'x';
+    } else {
+      sign = 'o';
+    }
+    return sign;
+  };
   const addSign = (e) => {
     console.log("pressed!");
     console.log(e.target.value);
-    e.target.textContent = 'x';
+    e.target.textContent = setSign();
     e.target.disabled = true;
-  }
+  };
 
   reset.addEventListener('click', resetGame);
   grid.forEach(field => {
     field.addEventListener('click', addSign);
   });
   
-  return {addSign, resetGame};
+  return {addSign, resetGame, setSign};
 })();
+
+console.log(displayController.setSign());
