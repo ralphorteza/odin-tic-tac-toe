@@ -1,21 +1,7 @@
 /* TODO: Add reset game functionality. */
-
-
-
-const gameBoard = () => {
-  let gameBoard = [];
-  gameBoard.length = 9;
-
-  return {gameBoard}
+const player = (name, sign) => {
+  return {name, sign};
 };
-
-
-/* const Player = (sign) => {
-}; */
-
-/* const gameController = (() => {
-})(); */
-
 
 /* TODO: Add grid input to put mark (x or o). */
 const displayController = (() => {
@@ -57,4 +43,13 @@ const displayController = (() => {
   return {addSign, resetGame, setSign};
 })();
 
-console.log(displayController.setSign());
+// console.log(displayController.setSign());
+const gameBoard = (() => {
+  let gameBoard = [];
+  gameBoard.length = 9;
+
+  const player1 = player('red', 'x');
+  const player2 = player('blue', 'o');
+  
+  return {gameBoard}
+});
