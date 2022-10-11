@@ -72,7 +72,6 @@ const displayController = (() => {
         row.push(board[j]);
       }
       if (row.every(cell => cell == 'x' || row.every(cell => cell == 'o'))) {
-        console.log("row");
         return true;
       }
     }
@@ -86,7 +85,6 @@ const displayController = (() => {
         col.push(board[i + 3 * j]);
       }
       if (col.every(cell => cell == 'x' || col.every(cell => cell == 'o'))) {
-        console.log("col");
         return true;
       }
     }
@@ -98,10 +96,8 @@ const displayController = (() => {
     let diagonal2 = [board[2], board[4], board[6]];
 
     if (diagonal1.every(cell => cell == 'x') || diagonal1.every(cell => cell == 'o')) {
-      console.log("diagonal1");
       return true;
     } else if (diagonal2.every(cell => cell == 'x') || diagonal2.every(cell => cell == 'o')) {
-      console.log("diagonal2");
       return true;
     } else {
       return false;
