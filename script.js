@@ -49,37 +49,40 @@ const displayController = (() => {
 
 /* TODO: Debug checkWinCondition */
   const checkWinCondition = () => {
-    if (checkRows() || checkColumns() || checkDiagonals()) {
+    /* if (checkRows() || checkColumns() || checkDiagonals()) {
       console.log("winner");
-/*       disableGame(); */
-    }
+      disableGame();
+    } */
+    if (checkRows() == true) { console.log("winner");}
   }
 
   const checkRows = () => {
-    if ((board[0] === board[1] && board[1] === board[2]) ||
-        (board[3] === board[4] && board[4] === board[5]) ||
-        (board[6] === board[7] && board[7] === board[8])) {
-          return true;
+    for (let i = 0; i < 3; i++) {
+      let row = [];
+      for (let j = i * 3; j < i * 3 + 3; j++) {
+        row.push(board[j]);
+      }
+      if (row.every(cell => cell == 'x' || row.every(cell => cell == 'o'))) {return true;}
     }
     return false;
   };
 
-  const checkColumns = () => {
+/*   const checkColumns = () => {
     if ((board[0] === board[3] && board[3] === board[6]) ||
         (board[1] === board[4] && board[4] === board[7]) ||
         (board[2] === board[5] && board[5] === board[8])) {
       return true;
     }
     return false;
-  };
-
+  }; */
+/* 
   const checkDiagonals = () => {
     if ((board[0] === board[4] && board[4] === board[8]) ||
         (board[6] === board[4] && board[4] === board[2])) {
       return true;
     }
     return false;
-  };
+  }; */
 
 /*   const disableGame = () => {
     let board = document.getElementById('grid');
