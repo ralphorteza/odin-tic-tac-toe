@@ -14,12 +14,14 @@ const player = (name, sign) => {
 const gameBoard = (() => {
   let gameBoard = [];
   gameBoard.length = 9;
-  
-  return {gameBoard}
+  const resetBoard = () => {
+    gameboard = [];
+    gameboard.length = 9;
+  }
+  return {gameBoard, resetBoard}
 })();
 
 
-/* TODO: Add grid input to put mark (x or o). */
 const displayController = (() => {
   const grid = document.querySelectorAll('.grid');
   const reset = document.querySelector('.reset');
@@ -37,25 +39,30 @@ const displayController = (() => {
       playerSign = player2.sign;
       console.log(`${player2.name} placed ${player2.sign}`);
     }
-
+    
     e.target.textContent = playerSign;
     let currField = e.target.value;
     board[currField] = playerSign;
     console.log(board);
     e.target.disabled = true;
-    checkWinCondition();
     turn++;
+    checkWinCondition();
+    console.log(`turn: ${turn}`)
+    checkDraw();
   };
 
-/* TODO: Debug checkWinCondition */
+  const checkDraw = () => {
+    if (turn == 9) {
+      console.log("draw");
+      resetGame();
+    }
+  }
+
   const checkWinCondition = () => {
-    /* if (checkRows() || checkColumns() || checkDiagonals()) {
+    if (checkRows() || checkColumns() || checkDiagonals()) {
       console.log("winner");
-      disableGame();
-    } */
-    if (checkRows() == true) { console.log("winner");}
-    if (checkColumns() == true) { console.log("winner");}
-    if (checkDiagonals() == true) { console.log("winner");}
+      resetGame();
+    } 
   }
 
   const checkRows = () => {
@@ -65,6 +72,7 @@ const displayController = (() => {
         row.push(board[j]);
       }
       if (row.every(cell => cell == 'x' || row.every(cell => cell == 'o'))) {
+        console.log("row");
         return true;
       }
     }
@@ -78,6 +86,7 @@ const displayController = (() => {
         col.push(board[i + 3 * j]);
       }
       if (col.every(cell => cell == 'x' || col.every(cell => cell == 'o'))) {
+        console.log("col");
         return true;
       }
     }
@@ -89,28 +98,22 @@ const displayController = (() => {
     let diagonal2 = [board[2], board[4], board[6]];
 
     if (diagonal1.every(cell => cell == 'x') || diagonal1.every(cell => cell == 'o')) {
+      console.log("diagonal1");
       return true;
     } else if (diagonal2.every(cell => cell == 'x') || diagonal2.every(cell => cell == 'o')) {
+      console.log("diagonal2");
       return true;
     } else {
       return false;
     }
   };
 
-/*   const disableGame = () => {
-    let board = document.getElementById('grid');
-    let fields = board.children;
-    for (let i = 0; i < fields.length; i++) {
-      let field = fields[i];
-      field.disabled = true;
-    }
-  } */
-
   const resetGame = () => {
-    let board = document.getElementById('grid');
-    let fields = board.children;
+    let cells = document.getElementById('grid');
+    let fields = cells.children;
     for (let i = 0; i < fields.length; i++) {
-      let field = fields[i];
+      let field = fields[i]
+      board[i] = null;
       field.textContent = '';
       field.disabled = false;
     }
@@ -121,7 +124,6 @@ const displayController = (() => {
     field.addEventListener('click', playGame);
   });
   
-  return {board, playGame, resetGame, player1, player2, turn};
+  return {playGame};
 })();
 
-// console.log(displayController.setSign());
