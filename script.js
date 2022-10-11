@@ -54,6 +54,7 @@ const displayController = (() => {
       disableGame();
     } */
     if (checkRows() == true) { console.log("winner");}
+    if (checkColumns() == true) { console.log("winner");}
   }
 
   const checkRows = () => {
@@ -62,19 +63,25 @@ const displayController = (() => {
       for (let j = i * 3; j < i * 3 + 3; j++) {
         row.push(board[j]);
       }
-      if (row.every(cell => cell == 'x' || row.every(cell => cell == 'o'))) {return true;}
+      if (row.every(cell => cell == 'x' || row.every(cell => cell == 'o'))) {
+        return true;
+      }
     }
     return false;
   };
 
-/*   const checkColumns = () => {
-    if ((board[0] === board[3] && board[3] === board[6]) ||
-        (board[1] === board[4] && board[4] === board[7]) ||
-        (board[2] === board[5] && board[5] === board[8])) {
-      return true;
+  const checkColumns = () => {
+    for (let i = 0; i < 3; i++) {
+      let col = [];
+      for (let j = 0; j < 3; j++) {
+        col.push(board[i + 3 * j]);
+      }
+      if (col.every(cell => cell == 'x' || col.every(cell => cell == 'o'))) {
+        return true;
+      }
     }
     return false;
-  }; */
+  };
 /* 
   const checkDiagonals = () => {
     if ((board[0] === board[4] && board[4] === board[8]) ||
