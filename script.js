@@ -55,6 +55,7 @@ const displayController = (() => {
     } */
     if (checkRows() == true) { console.log("winner");}
     if (checkColumns() == true) { console.log("winner");}
+    if (checkDiagonals() == true) { console.log("winner");}
   }
 
   const checkRows = () => {
@@ -82,14 +83,19 @@ const displayController = (() => {
     }
     return false;
   };
-/* 
+
   const checkDiagonals = () => {
-    if ((board[0] === board[4] && board[4] === board[8]) ||
-        (board[6] === board[4] && board[4] === board[2])) {
+    let diagonal1 = [board[0], board[4], board[8]];
+    let diagonal2 = [board[2], board[4], board[6]];
+
+    if (diagonal1.every(cell => cell == 'x') || diagonal1.every(cell => cell == 'o')) {
       return true;
+    } else if (diagonal2.every(cell => cell == 'x') || diagonal2.every(cell => cell == 'o')) {
+      return true;
+    } else {
+      return false;
     }
-    return false;
-  }; */
+  };
 
 /*   const disableGame = () => {
     let board = document.getElementById('grid');
