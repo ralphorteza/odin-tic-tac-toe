@@ -11,10 +11,19 @@ const player = (name, sign) => {
   };
 };
 
+const gameBoard = (() => {
+  let gameBoard = [];
+  gameBoard.length = 9;
+  
+  return {gameBoard}
+})();
+
+
 /* TODO: Add grid input to put mark (x or o). */
 const displayController = (() => {
   const grid = document.querySelectorAll('.grid');
   const reset = document.querySelector('.reset');
+  const board = gameBoard;
   const player1 = player('red', 'x');
   const player2 = player('blue', 'o');
   let turn = 0;
@@ -30,9 +39,56 @@ const displayController = (() => {
     }
 
     e.target.textContent = playerSign;
+    let currField = e.target.value;
+    board[currField] = playerSign;
+    console.log(board);
     e.target.disabled = true;
+    checkWinCondition();
     turn++;
   };
+
+/* TODO: Debug checkWinCondition */
+  const checkWinCondition = () => {
+    if (checkRows() || checkColumns() || checkDiagonals()) {
+      console.log("winner");
+/*       disableGame(); */
+    }
+  }
+
+  const checkRows = () => {
+    if ((board[0] === board[1] && board[1] === board[2]) ||
+        (board[3] === board[4] && board[4] === board[5]) ||
+        (board[6] === board[7] && board[7] === board[8])) {
+          return true;
+    }
+    return false;
+  };
+
+  const checkColumns = () => {
+    if ((board[0] === board[3] && board[3] === board[6]) ||
+        (board[1] === board[4] && board[4] === board[7]) ||
+        (board[2] === board[5] && board[5] === board[8])) {
+      return true;
+    }
+    return false;
+  };
+
+  const checkDiagonals = () => {
+    if ((board[0] === board[4] && board[4] === board[8]) ||
+        (board[6] === board[4] && board[4] === board[2])) {
+      return true;
+    }
+    return false;
+  };
+
+/*   const disableGame = () => {
+    let board = document.getElementById('grid');
+    let fields = board.children;
+    for (let i = 0; i < fields.length; i++) {
+      let field = fields[i];
+      field.disabled = true;
+    }
+  } */
 
   const resetGame = () => {
     let board = document.getElementById('grid');
@@ -49,13 +105,7 @@ const displayController = (() => {
     field.addEventListener('click', playGame);
   });
   
-  return {playGame, resetGame, player1, player2, turn};
+  return {board, playGame, resetGame, player1, player2, turn};
 })();
 
 // console.log(displayController.setSign());
-const gameBoard = (() => {
-  let gameBoard = [];
-  gameBoard.length = 9;
-  
-  return {gameBoard}
-})();
